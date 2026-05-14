@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Hospitals - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+    <style>
+        html, body {
+                     height: 100%; 
+                   }
+        body { 
+                display: flex; 
+                flex-direction: column; 
+                min-height: 100vh; 
+             }
+        main { 
+                 flex: 1 0 auto; 
+             }
+        footer {
+                  margin-top: auto; 
+               }
+        .table-container { 
+                             max-width: 1100px; 
+                             margin: 20px auto; 
+                             padding: 0 16px; 
+                         }
+        table {
+                  width: 100%; 
+                  border-collapse: collapse; 
+                  background: #fff; 
+              }
+        thead { 
+                  background: #f5f5f5; 
+              }
+        th, td {
+                   padding: 12px 10px; 
+                   border: 1px solid #e3e3e3; 
+                   text-align: left; 
+               }
+        th { 
+             font-weight: 600; 
+           }
+        tbody tr:nth-child(even) { background: #fafafa; }
+        .muted { color: #666; }
+        .toolbar { display:flex; justify-content: space-between; align-items: center; margin: 20px 0; }
+        .toolbar input { padding: 8px 10px; width: 280px; }
+        .action-buttons { display: flex; gap: 8px; justify-content: center; }
+        .btn-edit, .btn-delete { 
+            padding: 6px 12px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px; 
+            font-weight: 600; 
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-edit { 
+            background: #4CAF50; 
+            color: white; 
+        }
+        .btn-edit:hover { 
+            background: #45a049; 
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(76,175,80,0.3);
+        }
+        .btn-delete { 
+            background: #f44336; 
+            color: white; 
+        }
+        .btn-delete:hover { 
+            background: #da190b; 
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(244,67,54,0.3);
+        }
+        @media (max-width: 768px) {
+            .table-container { overflow-x: auto; }
+            table { min-width: 1000px; }
+            .action-buttons { flex-direction: column; gap: 4px; }
+            .btn-edit, .btn-delete { padding: 4px 8px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+                <h1>Life-line blood bank</h1>
+                <ul>
+                    <li><a href="admin.html">Dashboard</a></li>
+                    <li><a href="admin.html">Admin Home</a></li>
+                    <li><a href="manage_hospital.html">Manage-hospital</a></li>
+                    <li><a href="Admin_login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+
+            <h2>Hospitals</h2>
+            <div class="toolbar">
+                <input id="search" type="search" placeholder="Search by name, email, reg no..." />
+                <div class="muted" id="count"></div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="hospitalsTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Hospital ID</th>
+                        <th>Hospital Name</th>
+                        <th>Reg. No</th>
+                        <th>Contact Person</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Added At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+            </div>
+        </footer>
+        <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+    </footer>
+    <script>
+
+        
+    (function() {
+        const STORAGE_KEY = 'hospitals';
+        const tableBody = document.querySelector('#hospitalsTable tbody');
+        const searchInput = document.getElementById('search');
+        const countEl = document.getElementById('count');
+
+        function loadHospitals() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return [];
+                const parsed = JSON.parse(raw);
+                if (!Array.isArray(parsed)) return [];
+                return parsed;
+            } catch (e) {
+                console.error('Failed to parse hospitals from localStorage', e);
+                return [];
+            }
+        }
+
+        function ensureHospitalIds(list) {
+            let counter = parseInt(localStorage.getItem('hospitalIdCounter') || '0', 10);
+            if (!Number.isFinite(counter) || counter < 0) counter = 0;
+            let changed = false;
+            list.forEach(h => {
+                if (!h.hospitalId) {
+                    counter += 1;
+                    h.hospitalId = 'HSP' + String(counter).padStart(5, '0');
+                    changed = true;
+                }
+            });
+            if (changed) {
+                localStorage.setItem('hospitalIdCounter', String(counter));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            }
+            return list;
+        }
+
+        function renderRows(all, query) {
+            const q = (query || '').trim().toLowerCase();
+            const filtered = q
+                ? all.filter(h => (
+                    (h.hospital_name||'').toLowerCase().includes(q) ||
+                    (h.email||'').toLowerCase().includes(q) ||
+                    (h.registration_no||'').toLowerCase().includes(q)
+                ))
+                : all;
+
+            tableBody.innerHTML = '';
+            filtered.forEach((h, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${h.hospitalId || ''}</td>
+                    <td>${h.hospital_name || ''}</td>
+                    <td>${h.registration_no || ''}</td>
+                    <td>${h.contact_person || ''}</td>
+                    <td>${h.contact_no || ''}</td>
+                    <td>${h.email || ''}</td>
+                    <td>${h.address || ''}</td>
+                    <td>${h.createdAt ? new Date(h.createdAt).toLocaleString() : ''}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-edit" onclick="editHospital('${h.hospitalId}')">Edit</button>
+                            <button class="btn-delete" onclick="deleteHospital('${h.hospitalId}')">Delete</button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            countEl.textContent = `${filtered.length} of ${all.length} shown`;
+        }
+
+        const all = ensureHospitalIds(loadHospitals());
+        renderRows(all);
+        searchInput.addEventListener('input', () => renderRows(all, searchInput.value));
+
+        // Global functions for edit and delete operations
+        window.editHospital = function(hospitalId) {
+            const hospital = all.find(h => h.hospitalId === hospitalId);
+            if (hospital) {
+                // Store the hospital data for editing
+                localStorage.setItem('editingHospital', JSON.stringify(hospital));
+                // Redirect to hospital registration form for editing
+                window.location.href = 'hospital_register.html?edit=true';
+            }
+        };
+
+        window.deleteHospital = function(hospitalId) {
+            if (confirm('Are you sure you want to delete this hospital? This action cannot be undone.')) {
+                const updatedHospitals = all.filter(h => h.hospitalId !== hospitalId);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHospitals));
+                // Refresh the table
+                const refreshedHospitals = ensureHospitalIds(loadHospitals());
+                renderRows(refreshedHospitals);
+                alert('Hospital deleted successfully!');
+            }
+        };
+    })();
+    </script>
+</body>
+</html>
+
+

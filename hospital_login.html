@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Login - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Life-line blood bank</h1>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="login.html">Donor Login</a></li>
+                    <li><a href="Admin_login.html">Admin Login</a></li>
+                    <li><a href="hospital_login.html">Hospital Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="form-page">
+        <div class="form-container">
+            <h2>Hospital Login</h2>
+            <form>
+                <div class="form-group">
+                    <label for="hospital_id">Hospital ID</label>
+                    <input type="text" id="hospital_id" name="hospital_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" required>
+                        <span class="show-password-toggle" id="togglePassword">Show</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p>Not a hospital? <a href="login.html">Login as User</a></p>
+        </div>
+    </main>
+
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+            </div>
+        </footer>
+        <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+    </footer>    <script src="js/auth.js"></script>
+    <script src="js/hospital_login.js"></script>
+</body>
+</html>

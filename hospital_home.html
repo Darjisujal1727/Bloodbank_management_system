@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Home - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Life-line blood bank</h1>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="hospital_home.html">Dashboard</a></li>
+                    <li><a href="#order-blood">Order Blood</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="welcome-hospital">
+            <div class="container">
+                <h2>Welcome, <span id="hospital-welcome-name">Hospital</span>!</h2>
+                <p>Manage your blood needs efficiently.</p>
+                <div class="hospital-info-card">
+                    <h3>Hospital Information</h3>
+                    <p><strong>ID:</strong> <span id="hospital-id">[Hospital ID]</span></p>
+                    <p><strong>Name:</strong> <span id="hospital-name">[Hospital Name]</span></p>
+                    <p><strong>Registration No:</strong> <span id="hospital-reg">[Registration Number]</span></p>
+                    <p><strong>Contact Person:</strong> <span id="hospital-contact-person">[Contact Person]</span></p>
+                    <p><strong>Contact No:</strong> <span id="hospital-contact-no">[Contact Number]</span></p>
+                    <p><strong>Email:</strong> <span id="hospital-email">[Hospital Email]</span></p>
+                    <p><strong>Address:</strong> <span id="hospital-address">[Hospital Address]</span></p>
+                    <button class="btn">Update Profile</button>
+                </div>
+        </section>
+
+        <section id="order-blood">
+            <div class="container form-container">
+                <h3>Order Blood</h3>
+                <form id="blood-request-form">
+                    <div class="form-group">
+                        <label for="patient_name">Patient Name</label>
+                        <input type="text" id="patient_name" name="patient_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blood_type">Blood Type Needed</label>
+                        <select id="blood_type" name="blood_type" required>
+                            <option value="">Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="units">Units Required</label>
+                        <input type="number" id="units" name="units" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="urgency">Urgency</label>
+                        <select id="urgency" name="urgency" required>
+                            <option value="">Select Urgency</option>
+                            <option value="emergency">Emergency (within 1 hour)</option>
+                            <option value="urgent">Urgent (within 6 hours)</option>
+                            <option value="normal">Normal (within 24 hours)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Place Order</button>
+                </form>
+                <script>
+                    // Save blood request to localStorage and redirect to blood_requeste.html
+                    function nextRequestId() {
+                        const key = 'bloodRequestIdCounter';
+                        let n = parseInt(localStorage.getItem(key) || '0', 10);
+                        if (!Number.isFinite(n) || n < 0) n = 0;
+                        n += 1;
+                        localStorage.setItem(key, String(n));
+                        return 'REQ' + String(n).padStart(5, '0');
+                    }
+                    function getCurrentHospital() {
+                        // Prefer Auth helper
+                        if (window.Auth && typeof window.Auth.getCurrentUser === 'function') {
+                            const user = window.Auth.getCurrentUser();
+                            if (user && (user.role === 'hospital' || user.hospitalId)) return user;
+                        }
+                        // Fallback to localStorage currentUser
+                        try {
+                            const raw = localStorage.getItem('currentUser');
+                            const u = raw ? JSON.parse(raw) : null;
+                            if (u && (u.role === 'hospital' || u.hospitalId)) return u;
+                        } catch (e) {}
+                        // Last resort: infer from hospitals registry
+                        try {
+                            const listRaw = localStorage.getItem('hospitals');
+                            const hospitals = listRaw ? JSON.parse(listRaw) : [];
+                            if (Array.isArray(hospitals) && hospitals.length > 0) {
+                                const last = hospitals[hospitals.length - 1];
+                                if (last && (last.hospitalId || last.email)) {
+                                    return {
+                                        role: 'hospital',
+                                        name: last.hospital_name,
+                                        email: last.email,
+                                        hospitalId: last.hospitalId
+                                    };
+                                }
+                            }
+                        } catch (e) {}
+                        return null;
+                    }
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const form = document.getElementById('blood-request-form');
+                        if (form) {
+                            form.addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                const hospital = getCurrentHospital();
+                                if (!hospital) {
+                                    alert('You must be logged in as a hospital to place a request.');
+                                    return;
+                                }
+                                const req = {
+                                    requestId: nextRequestId(),
+                                    hospitalId: hospital.hospitalId || (hospital.id || ''),
+                                    patient_name: form.patient_name.value,
+                                    blood_type: form.blood_type.value,
+                                    units: form.units.value,
+                                    urgency: form.urgency.value,
+                                    date: new Date().toLocaleString()
+                                };
+                                const all = JSON.parse(localStorage.getItem('bloodRequests') || '[]');
+                                all.push(req);
+                                localStorage.setItem('bloodRequests', JSON.stringify(all));
+                                form.reset();
+                    form.reset();
+            alert('Request sent successfully!');
+                            });
+                }    });
+                </script>
+            </div>
+    </main>
+
+    
+        <footer class="custom-footer">
+            <div class="footer-top">
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <strong>Looking for Blood</strong>
+                        <ul>
+                            <li><a href="#">Blood Availability</a></li>
+                            <li><a href="#">Blood Directory</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>Want to Donate Blood</strong>
+                        <ul>
+                            <li><a href="#">Blood Donation Camp</a></li>
+                            <li><a href="#">Donor Login</a></li>
+                            <li><a href="#">About Blood Donation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>About Us</strong>
+                        <ul>
+                            <li><a href="#">About our website</a></li>
+                            <li><a href="#">Notifications</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Mobile Apps</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>Download App</strong>
+                        <div class="footer-apps">
+                            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="container">
+                    <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+                </div>
+            </footer>
+            <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+        </footer>
+        <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+    </footer>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine Blood Bank</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body { background: #fafbfc; }
+        .hero {
+            background: linear-gradient(120deg, #e02a2a 0%, #ff6a3d 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px 60px 20px;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 32px;
+        }
+        .cta-btn {
+            background: #fff;
+            color: #e02a2a;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 36px;
+            font-size: 1.12rem;
+            box-shadow: 0 2px 8px rgba(224,42,42,0.13);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .cta-btn:hover {
+            background: #ffe5e5;
+            color: #b82222;
+        }
+        .main-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            margin: 48px 0 0 0;
+        }
+        .main-link-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(31,38,135,0.10);
+            padding: 32px 30px 28px 30px;
+            min-width: 220px;
+            max-width: 320px;
+            text-align: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .main-link-card:hover {
+            box-shadow: 0 8px 32px rgba(224,42,42,0.13);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .main-link-card i {
+            font-size: 2.4rem;
+            color: #e02a2a;
+            margin-bottom: 12px;
+        }
+        .main-link-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.22rem;
+        }
+        .main-link-card p {
+            color: #444;
+            font-size: 0.98rem;
+            margin-bottom: 14px;
+        }
+        @media (max-width: 900px) {
+            .main-links { flex-direction: column; gap: 20px; }
+        }
+        .navbar {
+            background: #23272b;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            height: 62px;
+        }
+        .navbar .brand {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 18px;
+        }
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.07rem;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 5px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar-links a:hover {
+            background: #ff6a3d;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" style="background-color:black;">
+        <img src="images/logo 5.jpg" alt="L.L.B.B Logo" width="80" height="60">
+        <div class="navbar-links">
+            <a href="home.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="donor_home.html">Donor Panel</a>
+            <a href="hospital_home.html">Hospital Panel</a>
+            <a href="admin.html">Admin Panel</a>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>LifeLine Blood Bank</h1>
+        <p>India's unified platform for blood donors, hospitals, and blood banks. Find, donate, and manage blood resources with transparency and efficiency.</p>
+    </div>
+    <section class="donation-learn">
+        <h2 class="donation-title">Learn About Donation</h2>
+        <div class="donation-selector-row">
+            <label for="bloodType" class="blood-type-label">Select your Blood Type</label>
+            <div class="blood-type-selector" id="bloodTypeSelector">
+                <button class="blood-btn selected">A+</button>
+                <button class="blood-btn">O+</button>
+                <button class="blood-btn">B+</button>
+                <button class="blood-btn">AB+</button>
+                <button class="blood-btn">A-</button>
+                <button class="blood-btn">O-</button>
+                <button class="blood-btn">B-</button>
+                <button class="blood-btn">AB-</button>
+                <button class="blood-btn">RH-NULL</button>
+            </div>
+        </div>
+        <div class="donation-info-panel">
+            <div class="donation-compatibility">
+                <div class="can-take">
+                    <div class="icon-person" style="background:#fad7a0;"></div>
+                    <div class="compatibility-block">
+                        <div class="compatibility-title">You can take from</div>
+                        <div class="compatibility-list"><b>O+</b>  <b>O-</b>  <b>A+</b>  <b>A-</b></div>
+                    </div>
+                </div>
+                <div class="can-give">
+                    <div class="icon-person" style="background:#a3c9fa;"></div>
+                    <div class="compatibility-block">
+                        <div class="compatibility-title">You can give to</div>
+                        <div class="compatibility-list"><b>A+</b>  <b>AB+</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="donation-illustration">
+                <img src="images/img 1.png" alt="Blood Donation Illustration" 
+                     style="max-width: 220px; width:100%;">
+                <div class="donation-caption">One Blood Donation can save upto <span style="color:#d32a2a;">Three Lives</span></div>
+            </div>
+        </div>
+        <style>
+        .donation-learn { max-width: 900px; margin: 50px auto 30px auto; background: #fff; border-radius: 18px; box-shadow: 0 6px 32px rgba(31,38,135,0.08); padding: 32px 20px 30px 20px; }
+        .donation-title { text-align: center; color: #b82222; font-size: 2.1rem; font-weight: 700; margin-bottom: 24px; }
+        .donation-selector-row { text-align: center; margin-bottom: 16px; }
+        .blood-type-label { font-size: 1.07rem; color: #333; margin-right: 12px; }
+        .blood-type-selector { display: inline-flex; gap: 10px; margin-top: 8px; }
+        .blood-btn { background: #fff; border: 2px solid #e02a2a; color: #b82222; border-radius: 8px; font-weight: 600; font-size: 1.12rem; padding: 8px 26px; cursor: pointer; transition: background 0.18s, color 0.18s, border 0.18s; }
+        .blood-btn.selected, .blood-btn:focus { background: #e02a2a; color: #fff; border-color: #b82222; }
+        .blood-btn:hover:not(.selected) { background: #ffe5e5; color: #b82222; }
+        .donation-info-panel { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; justify-content: center; margin-top: 24px; }
+        .donation-compatibility { flex: 1 1 340px; min-width: 320px; max-width: 400px; display: flex; flex-direction: column; gap: 16px; }
+        .can-take, .can-give { display: flex; align-items: center; background: #ffe3b3; border-radius: 12px; padding: 14px 22px; margin-bottom: 8px; }
+        .can-give { background: #b3d1ff; }
+        .icon-person { width: 54px; height: 54px; border-radius: 50%; display: inline-block; margin-right: 16px; background-size:cover; }
+        .compatibility-block { flex: 1; }
+        .compatibility-title { font-weight: 600; font-size: 1.08rem; color: #222; margin-bottom: 5px; }
+        .compatibility-list { font-size: 1.12rem; color: #333; }
+        .donation-illustration { flex: 1 1 220px; min-width: 180px; display: flex; flex-direction: column; align-items: center; }
+        .donation-illustration img { border-radius: 10px; box-shadow: 0 2px 12px rgba(224,42,42,0.08); }
+        .donation-caption { font-size: 0.97rem; color: #333; margin-top: 14px; text-align: center; }
+        @media (max-width: 900px) { .donation-info-panel { flex-direction: column; align-items: stretch; gap: 18px; } .donation-learn { padding: 18px 4px; } }
+        </style>
+        <script>
+        const compatibility = {
+            'A+':   { take: ['O+', 'O-', 'A+', 'A-'], give: ['A+', 'AB+'] },
+            'O+':   { take: ['O+', 'O-'], give: ['O+', 'A+', 'B+', 'AB+'] },
+            'B+':   { take: ['O+', 'O-', 'B+', 'B-'], give: ['B+', 'AB+'] },
+            'AB+':  { take: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'], give: ['AB+'] },
+            'A-':   { take: ['O-', 'A-'], give: ['A+', 'A-', 'AB+', 'AB-'] },
+            'O-':   { take: ['O-'], give: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'] },
+            'B-':   { take: ['O-', 'B-'], give: ['B+', 'B-', 'AB+', 'AB-'] },
+            'AB-':  { take: ['O-', 'A-', 'B-', 'AB-'], give: ['AB+', 'AB-'] },
+            'RH-NULL': { take: ['RH-NULL'], give: ['RH-NULL'] }
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.blood-type-selector .blood-btn');
+            const takeDiv = document.querySelector('.can-take .compatibility-list');
+            const giveDiv = document.querySelector('.can-give .compatibility-list');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    buttons.forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    const type = btn.textContent.trim();
+                    const data = compatibility[type] || {take: [], give: []};
+                    takeDiv.innerHTML = data.take.map(t => `<b>${t}</b>`).join('  ');
+                    giveDiv.innerHTML = data.give.map(t => `<b>${t}</b>`).join('  ');
+                });
+            });
+        });
+        </script>
+    </section>
+    <section class="donation-types-section">
+        <h2 class="donation-types-title">Types of Donation</h2>
+        <div class="donation-types-tabs">
+            <div class="donation-types-tablist">
+                <button class="donation-tab-btn active" data-tab="rbc">Packed Red Blood Cells</button>
+                <button class="donation-tab-btn" data-tab="plasma">Plasma</button>
+                <button class="donation-tab-btn" data-tab="platelets">Platelets</button>
+            </div>
+            <div class="donation-types-content">
+                <div class="donation-tab-panel" id="tab-rbc" style="display:block;">
+                    <div class="donation-types-panel">
+                        <div class="donation-types-info">
+                            <div><b>What is it?</b></div>
+                            <div>Blood Collected straight from the donor into a blood bag and mixed with an anticoagulant is called as whole blood. This collected whole blood is then centrifuged and red cell, platelets and plasma are separated. The separated Red cells are mixed with a preservative to be called as packed red blood cells.</div>
+                            <div style="margin-top:12px;"><b>Who can donate?</b></div>
+                            <div>You need to be 18-65 years old, weight 45kg or more and be fit and healthy.</div>
+                            <div style="margin-top:12px;"><b>User For?</b></div>
+                            <div>Correction of severe anemia in a number of conditions and blood loss in case of child birth, surgery or trauma settings</div>
+                        </div>
+                        <div class="donation-types-img"><img src="images/red blood shel.png" alt="Red Blood Cells"/></div>
+                    </div>
+                </div>
+                <div class="donation-tab-panel" id="tab-plasma" style="display:none;">
+                    <div class="donation-types-panel">
+                        <div class="donation-types-info">
+                            <div><b>What is it?</b></div>
+                            <div>The straw-coloured liquid in which red blood cells, white blood cells, and platelets float in is called plasma.Contains special nutrients which can be used to create 18 different type of medical products to treat many different medical conditions. Plasma can be obtained from the collected whole blood after red blood cells and platelets have been separated. Additionally, it can also be collected using an apheresis equipment where other components are returned to the donor. The former is a common method of plasma preparation in our country.</div>
+                            <div style="margin-top:12px;"><b>Who can donate?</b></div>
+                            <div>The donation criteria is similar to that of red blood cell. However, for apheresis plasma collection minimum weight is 50 kgs.</div>
+                            <div style="margin-top:12px;"><b>User For?</b></div>
+                            <div>Used for bleeding patients with coagulation factor deficiency such as hemophilia A and B, von willibrand disease etc. also used in cases of blood loss due to trauma.</div>
+                        </div>
+                        <div class="donation-types-img"><img src="images/plasma.png" alt="Plasma"/></div>
+                    </div>
+                </div>
+                <div class="donation-tab-panel" id="tab-platelets" style="display:none;">
+                    <div class="donation-types-panel">
+                        <div class="donation-types-info">
+                            <div><b>What is it?</b></div>
+                            <div>These are cellular elements in blood which wedge together to help to clot and reduce bleeding. Always in high demand, Vital for people with low platelet count, like hematology and cancer patients.</div>
+                            <div style="margin-top:12px;"><b>Who can donate?</b></div>
+                            <div>One can donate whole blood from which the blood centre will separate platelets from other components. Criteria similar to whole blood donation apply. Alternatively, one can donate using apheresis equipment where only platelets are collected and rest components are returned back to donate. One need to satisfy whole blood criteria and pre- donation screening which include negative infectious markers and platelet count >1,50,000 per microlitre of blood. Weight should be >50kgs.</div>
+                            <div style="margin-top:12px;"><b>User For?</b></div>
+                            <div>Conditions with very low platelet count such as Cancer, blood diseases, trauma, dengue etc.</div>
+                        </div>
+                        <div class="donation-types-img"><img src="images/platlate.png" alt="Platelets"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+        .donation-types-section { max-width: 1100px; margin: 60px auto 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 6px 32px rgba(31,38,135,0.08); padding: 32px 20px 30px 20px; }
+        .donation-types-title { text-align: center; color: #b82222; font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+        .donation-types-desc { text-align: center; color: #333; font-size: 1.08rem; margin-bottom: 30px; }
+        .donation-types-tabs { display: flex; gap: 0; }
+        .donation-types-tablist { display: flex; flex-direction: column; min-width: 190px; border-right: 1.5px solid #f3cfcf; }
+        .donation-tab-btn { background: #fff; border: none; border-radius: 8px 8px 0 0; color: #b82222; font-size: 1.08rem; font-weight: 500; text-align: left; padding: 16px 18px; margin-bottom: 2px; cursor: pointer; transition: background 0.16s, color 0.16s; border-left: 4px solid transparent; }
+        .donation-tab-btn.active { background: #ffe5e5; color: #b82222; border-left: 4px solid #e02a2a; }
+        .donation-types-content { flex: 1; padding-left: 0; }
+        .donation-tab-panel { display: none; }
+        .donation-tab-panel[style*='display:block'] { display: block; }
+        .donation-types-panel { display: flex; gap: 30px; align-items: flex-start; }
+        .donation-types-info { flex: 2; font-size: 1.06rem; color: #222; }
+        .donation-types-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+        .donation-types-img img { max-width: 220px; width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(224,42,42,0.08); }
+        @media (max-width: 900px) { .donation-types-section { padding: 18px 4px; } .donation-types-panel { flex-direction: column; gap: 18px; } .donation-types-tablist { flex-direction: row; border-right: none; border-bottom: 2px solid #f3cfcf; min-width: 0; } .donation-tab-btn { border-radius: 8px 8px 0 0; border-left: none; border-bottom: 4px solid transparent; margin-bottom: 0; margin-right: 2px; } .donation-tab-btn.active { border-bottom: 4px solid #e02a2a; border-left: none; } .donation-types-content { padding-left: 0; } }
+        </style>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.donation-tab-btn');
+            const tabPanels = document.querySelectorAll('.donation-tab-panel');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const tab = btn.getAttribute('data-tab');
+                    tabPanels.forEach(panel => {
+                        panel.style.display = 'none';
+                    });
+                    document.getElementById('tab-' + tab).style.display = 'block';
+                });
+            });
+        });
+        </script>
+    </section>
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+            </div>
+        </footer>
+        <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+    </footer>
+</body>
+</html>

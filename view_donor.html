@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Donors - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+   
+   <style>
+
+
+        html, body {
+                     height: 100%; 
+                   }
+        body { 
+                 display: flex; 
+                 flex-direction: column; 
+                 min-height: 100vh; 
+             }
+      
+        main { 
+                 flex: 1 0 auto; 
+             }
+      
+        footer { 
+                 margin-top: auto; 
+               }
+      
+       .table-container {
+                           max-width: 1100px; 
+                           margin: 20px auto; 
+                           padding: 0 16px; 
+                        }
+      
+        table {
+                  width: 100%; 
+                  border-collapse: collapse; 
+                  background: #fff; 
+              }
+        
+        thead { 
+                  background: #f5f5f5; 
+              }
+      
+        th, td { 
+                  padding: 12px 10px; 
+                  border: 1px solid #e3e3e3; 
+                  text-align: left; 
+                }
+        
+        th { 
+               font-weight: 600; 
+            }
+        
+        tbody tr:nth-child(even) {
+                                   background: #fafafa; 
+                                }
+      
+        .actions { 
+                   display: flex; 
+                   gap: 8px; 
+                }
+      
+        .muted { 
+                  color: #666; 
+                }
+        
+        .toolbar { 
+                   display:flex; 
+                   justify-content: space-between; 
+                   align-items: center; 
+                   margin: 20px 0; 
+                }
+      
+        .toolbar input { 
+                          padding: 8px 10px; 
+                          width: 280px; 
+                       }
+        
+        .badge { padding: 2px 8px; 
+                 border-radius: 999px; 
+                 font-size: 12px; 
+               }
+        
+       .badge-new { 
+                     background: #e6f4ea; 
+                     color: #137333; 
+                  }
+      
+        .badge-existing { 
+                          background: #e8f0fe; 
+                          color: #174ea6; 
+                        }
+        @media (max-width: 768px) {
+
+             .table-container { overflow-x: auto; }
+              table { min-width: 800px; }
+             }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav>
+                <h1>Life-line blood bank</h1>
+                <ul>
+                    <li><a href="admin.html">Dashboard</a></li>
+                    <li><a href="admin.html">Admin Home</a></li>
+                    <li><a href="add_doner.html">Add-Donor</a></li>
+                    <li><a href="Admin_login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Donors</h2>
+            <div class="toolbar">
+                <input id="search" type="search" placeholder="Search by name, email, blood group..." />
+                <div class="muted" id="count"></div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="donorsTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Donor ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Blood Group</th>
+                        <th>Diseases</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Added At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+            </div>
+        </footer>
+        <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+    </footer>
+   
+   <script>
+
+
+    (function() {
+        const STORAGE_KEY = 'donors';
+        const tableBody = document.querySelector('#donorsTable tbody');
+        const searchInput = document.getElementById('search');
+        const countEl = document.getElementById('count');
+
+        function loadDonors() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return [];
+                const parsed = JSON.parse(raw);
+                if (!Array.isArray(parsed)) return [];
+                return parsed;
+            } catch (e) {
+                console.error('Failed to parse donors from localStorage', e);
+                return [];
+            }
+        }
+
+        function ensureDonorIds(donors) {
+            let counter = parseInt(localStorage.getItem('donorIdCounter') || '0', 10);
+            if (!Number.isFinite(counter) || counter < 0) counter = 0;
+            let changed = false;
+            donors.forEach(d => {
+                if (!d.donorId) {
+                    counter += 1;
+                    d.donorId = 'DNR' + String(counter).padStart(5, '0');
+                    changed = true;
+                }
+            });
+            if (changed) {
+                localStorage.setItem('donorIdCounter', String(counter));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(donors));
+            }
+            return donors;
+        }
+
+
+        function formatDate(iso) {
+            if (!iso) return '';
+            const d = new Date(iso);
+            if (isNaN(d.getTime())) return '';
+            return d.toLocaleString();
+        }
+
+        //to update or delete the donor data from the table
+
+        function saveDonors(list) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                return true;
+            } catch (e) {
+                console.error('Failed to save donors', e);
+                alert('Failed to save donors.');
+                return false;
+            }
+        }
+
+        function deleteDonorById(donorId) {
+            const donors = loadDonors();
+            const idx = donors.findIndex(d => (d.donorId || '').toLowerCase() === (donorId || '').toLowerCase());
+            if (idx === -1) return;
+            donors.splice(idx, 1);
+            saveDonors(donors);
+        }
+
+        function promptEdit(label, currentValue) {
+            return window.prompt('Update ' + label + ':', currentValue == null ? '' : String(currentValue));
+        }
+
+        function updateDonorById(donorId) {
+            const donors = loadDonors();
+            const idx = donors.findIndex(d => (d.donorId || '').toLowerCase() === (donorId || '').toLowerCase());
+            if (idx === -1) return;
+            const d = donors[idx];
+
+            const updated = Object.assign({}, d);
+            const name = promptEdit('Name', d.name || '');
+            if (name === null) return; // cancelled
+            updated.name = name.trim();
+
+            const email = promptEdit('Email', d.email || '');
+            if (email === null) return;
+            updated.email = email.trim();
+
+            const contact = promptEdit('Contact No', d.contact_no || '');
+            if (contact === null) return;
+            updated.contact_no = contact.trim();
+
+            const age = promptEdit('Age', d.age || '');
+            if (age === null) return;
+            updated.age = age.trim();
+
+            const gender = promptEdit('Gender (Male/Female)', d.gender || '');
+            if (gender === null) return;
+            updated.gender = gender.trim();
+
+            const blood = promptEdit('Blood Group', d.blood_group || '');
+            if (blood === null) return;
+            updated.blood_group = blood.trim();
+
+            const disease = promptEdit('Diseases', d.disease || '');
+            if (disease === null) return;
+            updated.disease = disease.trim();
+
+            const address = promptEdit('Address', d.address || '');
+            if (address === null) return;
+            updated.address = address.trim();
+
+            const status = promptEdit('Status (new/existing)', d.status || 'existing');
+            if (status === null) return;
+            updated.status = (status.trim().toLowerCase() === 'new') ? 'new' : 'existing';
+
+            donors[idx] = updated;
+            saveDonors(donors);
+        }
+
+
+        function renderRows(allDonors, query) {
+            const q = (query || '').trim().toLowerCase();
+            const donors = q
+                ? allDonors.filter(d => (
+                    (d.name||'').toLowerCase().includes(q) ||
+                    (d.email||'').toLowerCase().includes(q) ||
+                    (d.contact_no||'').toLowerCase().includes(q) ||
+                    (d.blood_group||'').toLowerCase().includes(q) ||
+                    (d.gender||'').toLowerCase().includes(q)
+                ))
+                : allDonors;
+
+            tableBody.innerHTML = '';
+            donors.forEach((d, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${d.donorId || ''}</td>
+                    <td>${d.name || ''}</td>
+                    <td>${d.email || ''}</td>
+                    <td>${d.contact_no || ''}</td>
+                    <td>${d.age || ''}</td>
+                    <td>${d.gender || ''}</td>
+                    <td>${d.blood_group || ''}</td>
+                    <td>${d.disease || ''}</td>
+                    <td>${d.address || ''}</td>
+                    <td><span class="badge ${d.status === 'new' ? 'badge-new' : 'badge-existing'}">${d.status === 'new' ? 'New' : 'Existing'}</span></td>
+                    <td>${formatDate(d.createdAt)}</td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-small" data-action="edit" data-id="${d.donorId}">Update</button>
+                            <button class="btn-small" data-action="delete" data-id="${d.donorId}">Delete</button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            countEl.textContent = `${donors.length} of ${allDonors.length} shown`;
+
+            // attach action handlers (event delegation)
+            tableBody.querySelectorAll('button[data-action]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    const id = this.getAttribute('data-id');
+                    if (!id) return;
+                    if (action === 'delete') {
+                        if (confirm('Are you sure you want to delete donor ' + id + '?')) {
+                            deleteDonorById(id);
+                            const refreshed = ensureDonorIds(loadDonors());
+                            renderRows(refreshed, searchInput.value);
+                        }
+                    } else if (action === 'edit') {
+                        updateDonorById(id);
+                        const refreshed = ensureDonorIds(loadDonors());
+                        renderRows(refreshed, searchInput.value);
+                    }
+                });
+            });
+        }
+
+
+
+        let all = ensureDonorIds(loadDonors());
+        renderRows(all);
+        searchInput.addEventListener('input', () => {
+            all = ensureDonorIds(loadDonors());
+            renderRows(all, searchInput.value);
+        });
+    })();
+
+
+    </script>
+
+</body>
+</html>
+
+

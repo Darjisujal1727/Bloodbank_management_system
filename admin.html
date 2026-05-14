@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="admin.html">Dashboard</a></li>
+                    <li><a href="view_donor.html">Donors</a></li>
+                    <li><a href="view_hospital.html">Hospitals</a></li>
+                    <li><a href="view_bloodbank.html">Blood-Inventory</a></li>
+                    <li><a href="Admin_login.html">Logout</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="welcome-staff">
+            <div class="container">
+                <h2>Welcome, Admin!</h2>
+                <p>Manage the Blood Bank Connector system.</p>
+            </div>
+        </section>
+
+        <section id="blood-inventory" class="form-page">
+            <div class="container form-container">
+                <h3>Manage Blood Inventory</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="blood_id">Blood ID</label>
+                        <input type="text" id="blood_id" name="blood_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blood_type">Blood Type</label>
+                        <select id="blood_type" name="blood_type" required>
+                            <option value="">Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="RH-NULL">RH-NULL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity (units)</label>
+                        <input type="number" id="quantity" name="quantity" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="donor_id">Donor ID</label>
+                        <input type="text" id="donor_id" name="donor_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="donation_date">Donation Date</label>
+                        <input type="date" id="donation_date" name="donation_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiry_date">Expiry Date</label>
+                        <input type="date" id="expiry_date" name="expiry_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="available">Available</option>
+                            <option value="used">Used</option>
+                            <option value="expired">Expired</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Add/Update Blood Unit</button>
+                </form>
+            </div>
+            
+        </section>
+
+        <!-- Placeholder sections for other management features -->
+        <div class="admin-card-grid">
+            <div class="admin-card">
+                <h3>Donor Management</h3>
+                <p>View and manage donor records.</p>
+                <div class="admin-card-actions">
+                    <button class="admin-card-btn primary" onclick="location.href='view_donor.html'">View Donors</button>
+                    <button class="admin-card-btn secondary" onclick="location.href='add_doner.html'">Add New Donor</button>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h3>Hospital Management</h3>
+                <p>View registered hospitals and manage requests.</p>
+                <div class="admin-card-actions">
+                    <button class="admin-card-btn primary" onclick="location.href='view_hospital.html'">View Hospitals</button>
+                    <button class="admin-card-btn secondary" onclick="location.href='manage_hospital.html'">Manage Hospitals</button>
+                    <button class="admin-card-btn secondary" onclick="location.href='blood_requeste.html'">Blood Request</button>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h3>Blood Bank Management</h3>
+                <p>View blood bank details and operations.</p>
+                <div class="admin-card-actions">
+                    <button class="admin-card-btn primary" onclick="location.href='view_bloodbank.html'">View Blood Banks</button>
+                </div>
+            </div>
+        </div>
+        <style>
+        .admin-card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin: 40px 0 24px 0;
+        }
+        .admin-card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.12);
+            padding: 32px 28px 28px 28px;
+            min-width: 320px;
+            max-width: 370px;
+            flex: 1 1 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .admin-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 36px 0 rgba(224,42,42,0.18);
+        }
+        .admin-card h3 {
+            color: #e02a2a;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .admin-card p {
+            color: #444;
+            margin-bottom: 18px;
+            min-height: 48px;
+        }
+        .admin-card-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .admin-card-btn {
+            flex: 1 1 130px;
+            min-width: 130px;
+            max-width: 180px;
+            padding: 12px 0;
+            font-size: 1rem;
+            border-radius: 7px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 2px 8px rgba(224,42,42,0.13);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 0;
+            margin-top: 0;
+            margin-right: 0;
+        }
+        .admin-card-btn.primary {
+            background: linear-gradient(90deg, #e02a2a 60%, #ff6a3d 100%);
+            color: #fff !important;
+        }
+        .admin-card-btn.secondary {
+            background: #f2f2f2;
+            color: #d22a2a !important;
+            border: 1.5px solid #e02a2a;
+        }
+        .admin-card-btn.primary:hover {
+            background: linear-gradient(90deg, #ff6a3d 0%, #e02a2a 100%);
+            color: #fff !important;
+            transform: translateY(-1px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(224,42,42,0.21);
+        }
+        .admin-card-btn.secondary:hover {
+            background: #fff2f2;
+            color: #b82222 !important;
+            border-color: #b82222;
+            transform: translateY(-1px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(224,42,42,0.08);
+        }
+        @media (max-width: 1100px) {
+            .admin-card-grid { flex-direction: column; align-items: center; }
+            .admin-card { width: 95%; max-width: 480px; }
+        }
+        </style>
+
+    </main>
+
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script>
+
+    // Handle blood inventory form submissions
+    document.addEventListener('DOMContentLoaded', function() {
+        const bloodForm = document.querySelector('section#blood-inventory form');
+        if (bloodForm) {
+            bloodForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                try {
+                    const inventoryRaw = localStorage.getItem('bloodInventory');
+                    const inventory = inventoryRaw ? JSON.parse(inventoryRaw) : [];
+                    
+                    function nextBloodUnitId() {
+                        const key = 'bloodUnitIdCounter';
+                        let n = parseInt(localStorage.getItem(key) || '0', 10);
+                        if (!Number.isFinite(n) || n < 0) n = 0;
+                        n += 1;
+                        localStorage.setItem(key, String(n));
+                        return 'BLD' + String(n).padStart(5, '0');
+                    }
+                    
+                    const bloodUnit = {
+                        bloodUnitId: nextBloodUnitId(),
+                        blood_id: document.getElementById('blood_id')?.value || '',
+                        blood_type: document.getElementById('blood_type')?.value || '',
+                        quantity: document.getElementById('quantity')?.value || '',
+                        donor_id: document.getElementById('donor_id')?.value || '',
+                        donation_date: document.getElementById('donation_date')?.value || '',
+                        expiry_date: document.getElementById('expiry_date')?.value || '',
+                        status: document.getElementById('status')?.value || '',
+                        createdAt: new Date().toISOString()
+                    };
+                    
+                    inventory.push(bloodUnit);
+                    localStorage.setItem('bloodInventory', JSON.stringify(inventory));
+                    
+                    // Clear form after successful save
+                    bloodForm.reset();
+                    alert('Blood unit added successfully!');
+                } catch (err) {
+                    console.error('Failed to save blood unit to localStorage', err);
+                    alert('Failed to save blood unit');
+                }
+            });
+        }
+    });
+
+    
+    </script>
+</body>
+</html>
+
+

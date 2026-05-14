@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Home - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Life-line blood bank</h1>
+                <ul>               
+                        <li><a href="home.html">Home</a></li>
+                         <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="welcome-donor">
+            <div class="container">
+                <h2><center>Welcome.... To Life-Line Blood Bank</center></h2>
+                <div class="donor-info-card">
+                    <h3>Your  Information</h3>
+                    <p><strong>ID:</strong> <span id="donor-id">[Donor ID]</span></p>
+                    <p><strong>Name:</strong> <span id="donor-name">[Donor Name]</span></p>
+                    <p><strong>Blood Group:</strong> <span id="donor-blood">[Blood Group]</span></p>
+                    <p><strong>Last Donation:</strong> <span id="donor-last">[Date]</span></p>
+                    <p><strong>Next Eligibility:</strong> <span id="donor-next">[Date]</span></p>
+                    <button class="btn">Update Profile</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="upcoming-camps">
+            <div class="container">
+                    <div class="camp-item">
+                        <h4>Community Center Blood Camp</h4>
+                        <p><strong>Date:</strong> september 11, 2024</p>
+                        <p><strong>Location:</strong> Community Center Hall</p>
+                        <p><strong>Time:</strong> 10:00 AM - 3:00 PM</p>
+                        <a href="#" class="btn-small">Register</a>
+                        <p><center>Thank you for being a part of our mission to save lives.</center></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   
+        <footer class="custom-footer">
+            <div class="footer-top">
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <strong>Looking for Blood</strong>
+                        <ul>
+                            <li><a href="#">Blood Availability</a></li>
+                            <li><a href="#">Blood Directory</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>Want to Donate Blood</strong>
+                        <ul>
+                            <li><a href="#">Blood Donation Camp</a></li>
+                            <li><a href="#">Donor Login</a></li>
+                            <li><a href="#">About Blood Donation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>About Us</strong>
+                        <ul>
+                            <li><a href="#">About our website</a></li>
+                            <li><a href="#">Notifications</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Mobile Apps</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>Download App</strong>
+                        <div class="footer-apps">
+                            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="container">
+                    <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+                </div>
+            </footer>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

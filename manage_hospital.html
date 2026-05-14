@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Hospital - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Life-line blood bank</h1>
+                <ul>
+                    <li><a href="admin.html">Admin Home</a></li>
+                    <li><a href="view_hospital.html">View Hospitals</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="form-page">
+        <div class="form-container">
+            <h2>Manage Hospital</h2>
+            <form action="hospital_home.html" method="GET">
+                <div class="form-group">
+                    <label for="hospital_name">Hospital Name</label>
+                    <input type="text" id="hospital_name" name="hospital_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registration_no">Registration Number</label>
+                    <input type="text" id="registration_no" name="registration_no" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact_person">Contact Person</label>
+                    <input type="text" id="contact_person" name="contact_person" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact_no">Contact Number</label>
+                    <input type="tel" id="contact_no" name="contact_no" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" required>
+                        <span class="show-password-toggle" id="togglePassword">Show</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <span class="show-password-toggle" id="toggleConfirmPassword">Show</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Add Hospital</button>
+    </main>
+
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+            </div>
+        </footer>
+        <style>.custom-footer {background: #23272b;color: #fff;font-size: 15px;margin-top: 40px;border-top: 1px solid #1a1d20;}.footer-top {padding: 32px 0 10px 0;max-width: 1300px;margin: 0 auto;}.footer-cols {display: flex;flex-wrap: wrap;justify-content: space-between;gap: 20px;}.footer-col {min-width: 180px;flex: 1 1 170px;margin-bottom: 18px;}.footer-col strong {display: block;margin-bottom: 12px;font-size: 16px;color: #fff;font-weight: 600;}.footer-col ul {list-style: none;padding: 0;margin: 0;}.footer-col ul li {margin-bottom: 7px;}.footer-col ul li a {color: #fff;text-decoration: none;transition: color 0.2s;font-size: 15px;}.footer-col ul li a:hover {color: #ff6a3d;text-decoration: underline;}.footer-apps {margin-top: 8px;}.footer-app-badge {height: 38px;margin-bottom: 6px;margin-right: 2px;display: block;}.footer-logos {display: flex;justify-content: center;align-items: center;gap: 48px;margin: 32px 0 14px 0;}.footer-logo {height: 54px;object-fit: contain;background: none;}.footer-bottom-text {text-align: center;font-size: 13px;color: #bbb;padding-bottom: 18px;line-height: 1.7;}.footer-bottom-text span {margin: 0 3px;color: #bbb;}@media (max-width: 900px) {.footer-cols { flex-direction: column; gap: 18px; }.footer-logos { gap: 24px; }}</style>
+    </footer>
+    <script src="js/auth.js"></script>
+
+    <script>
+    // Handle hospital management form submissions
+    document.addEventListener('DOMContentLoaded', function() {
+        const hospitalForm = document.getElementById('manageHospitalForm');
+        if (hospitalForm) {
+            hospitalForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                try {
+                    const hospitalsRaw = localStorage.getItem('hospitals');
+                    const hospitals = hospitalsRaw ? JSON.parse(hospitalsRaw) : [];
+                    
+                    function nextHospitalId() {
+                        const key = 'hospitalIdCounter';
+                        let n = parseInt(localStorage.getItem(key) || '0', 10);
+                        if (!Number.isFinite(n) || n < 0) n = 0;
+                        n += 1;
+                        localStorage.setItem(key, String(n));
+                        return 'HSP' + String(n).padStart(5, '0');
+                    }
+                    
+                    const hospital = {
+                        hospitalId: nextHospitalId(),
+                        hospital_name: document.getElementById('hospital_name').value,
+                        registration_no: document.getElementById('registration_no').value,
+                        contact_person: document.getElementById('contact_person').value,
+                        contact_no: document.getElementById('contact_no').value,
+                        address: document.getElementById('address').value,
+                        email: document.getElementById('email').value,
+                        license_number: document.getElementById('license_number').value,
+                        hospital_type: document.getElementById('hospital_type').value,
+                        specialization: document.getElementById('specialization').value,
+                        createdAt: new Date().toISOString(),
+                        status: 'managed'
+                    };
+                    
+                    hospitals.push(hospital);
+                    localStorage.setItem('hospitals', JSON.stringify(hospitals));
+                    
+                    // Clear form after successful save
+                    hospitalForm.reset();
+                    alert('Hospital added successfully!');
+                } catch (err) {
+                    console.error('Failed to save hospital to localStorage', err);
+                    alert('Failed to save hospital');
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

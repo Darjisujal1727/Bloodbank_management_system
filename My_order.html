@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Blood Bank Connector</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Life-line blood bank</h1>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="hospital_home.html">Dashboard</a></li>
+                    <li><a href="blood_requeste.html#order-blood">Order Blood</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+i           <h2>Hospital Blood Requests</h2>
+            <div class="toolbar">
+                <input id="search" type="search" placeholder="Search by patient name, blood type, urgency..." />
+                <div class="muted" id="count"></div>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="requestsTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Request ID</th>
+                        <th>Patient Name</th>
+                        <th>Blood Type</th>
+                        <th>Units</th>
+                        <th>Urgency</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <style>
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1 0 auto; }
+        footer { margin-top: auto; }
+        .table-container { max-width: 1100px; margin: 20px auto; padding: 0 16px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        thead { background: #f5f5f5; }
+        th, td { padding: 12px 10px; border: 1px solid #e3e3e3; text-align: left; }
+        th { font-weight: 600; }
+        tbody tr:nth-child(even) { background: #fafafa; }
+        .muted { color: #666; }
+        .toolbar { display:flex; justify-content: space-between; align-items: center; margin: 20px 0; }
+        .toolbar input { padding: 8px 10px; width: 280px; }
+        @media (max-width: 768px) {
+            .table-container { overflow-x: auto; }
+            table { min-width: 900px; }
+        }
+    </style>
+    <script src="js/auth.js"></script>
+    <script>
+    (function() {
+        const STORAGE_KEY = 'bloodRequests';
+        const tableBody = document.querySelector('#requestsTable tbody');
+        const searchInput = document.getElementById('search');
+        const countEl = document.getElementById('count');
+        function getCurrentHospital() {
+            if (window.Auth && typeof Auth.getCurrentUser === 'function') {
+                const user = Auth.getCurrentUser();
+                return user && user.role === 'hospital' ? user : null;
+            }
+            return null;
+        }
+        function loadRequests() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return [];
+                const parsed = JSON.parse(raw);
+                if (!Array.isArray(parsed)) return [];
+                const hospital = getCurrentHospital();
+                if (!hospital) return [];
+                return parsed.filter(r => r.hospitalId === hospital.hospitalId);
+            } catch (e) {
+                console.error('Failed to parse bloodRequests from localStorage', e);
+                return [];
+            }
+        }
+        function renderRows(all, query) {
+            const q = (query || '').trim().toLowerCase();
+            const filtered = q
+                ? all.filter(r => (
+                    (r.patient_name||'').toLowerCase().includes(q) ||
+                    (r.blood_type||'').toLowerCase().includes(q) ||
+                    (r.urgency||'').toLowerCase().includes(q)
+                ))
+                : all;
+            tableBody.innerHTML = '';
+            filtered.forEach((r, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${r.requestId || ''}</td>
+                    <td>${r.patient_name || ''}</td>
+                    <td>${r.blood_type || ''}</td>
+                    <td>${r.units || ''}</td>
+                    <td>${r.urgency || ''}</td>
+                    <td>${r.date || ''}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            countEl.textContent = `${filtered.length} of ${all.length} shown`;
+        }
+        const all = loadRequests();
+        renderRows(all);
+        searchInput.addEventListener('input', () => renderRows(all, searchInput.value));
+    })();
+    </script>
+    <footer class="custom-footer">
+        <div class="footer-top">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <strong>Looking for Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Availability</a></li>
+                        <li><a href="#">Blood Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Want to Donate Blood</strong>
+                    <ul>
+                        <li><a href="#">Blood Donation Camp</a></li>
+                        <li><a href="#">Donor Login</a></li>
+                        <li><a href="#">About Blood Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>About Us</strong>
+                    <ul>
+                        <li><a href="#">About our website</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <strong>Download App</strong>
+                    <div class="footer-apps">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="custom-footer">
+            <div class="footer-top">
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <strong>Looking for Blood</strong>
+                        <ul>
+                            <li><a href="#">Blood Availability</a></li>
+                            <li><a href="#">Blood Directory</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>Want to Donate Blood</strong>
+                        <ul>
+                            <li><a href="#">Blood Donation Camp</a></li>
+                            <li><a href="#">Donor Login</a></li>
+                            <li><a href="#">About Blood Donation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>About Us</strong>
+                        <ul>
+                            <li><a href="#">About our website</a></li>
+                            <li><a href="#">Notifications</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Mobile Apps</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <strong>Download App</strong>
+                        <div class="footer-apps">
+                            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="footer-app-badge"></a>
+                            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="footer-app-badge"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="container">
+                    <p>&copy; 2025 Life-line blood bank. All rights reserved.</p>
+                </div>
+            </footer>
+</body>
+</html>
